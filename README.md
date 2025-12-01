@@ -1,0 +1,1 @@
+This project is structured according to [go standards](https://github.com/golang-standards/project-layout/blob/master/assets/README.md)

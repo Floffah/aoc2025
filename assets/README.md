@@ -1,0 +1,1 @@
+structured as `day.input`

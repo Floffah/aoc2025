@@ -1,0 +1,10 @@
+# https://taskfile.dev
+
+$schema: https://taskfile.dev/schema.json
+version: '3'
+
+tasks:
+  run:
+    desc: Run all days and parts
+    cmds:
+      - go run ./...
