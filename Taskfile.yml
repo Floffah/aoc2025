@@ -5,6 +5,12 @@ version: '3'
 
 tasks:
   run:
+    vars:
+      CMD_DIRS:
+        sh: |
+          find cmd -mindepth 1 -maxdepth 1 -type d | sort
     desc: Run all days and parts
     cmds:
-      - go run ./...
+      - for:
+          var: CMD_DIRS
+        cmd: go run ./{{ .ITEM }}/...

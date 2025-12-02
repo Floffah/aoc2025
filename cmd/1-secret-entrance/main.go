@@ -1,11 +1,12 @@
 package main
 
 import (
-	inputs "aoc2025/internal/pkg/inputs"
-	"aoc2025/internal/pkg/visuals"
 	"math"
 	"strconv"
 	"strings"
+
+	"github.com/Floffah/aoc2025/internal/pkg/inputs"
+	"github.com/Floffah/aoc2025/internal/pkg/visuals"
 )
 
 func main() {
@@ -23,24 +24,7 @@ func part1(lines []string) {
 	sum := 0
 
 	for _, line := range lines {
-		if strings.Trim(line, " ") == "" {
-			continue
-		}
-
-		prefixChar := line[0]
-		num, err := strconv.ParseInt(line[1:], 10, 32)
-		if err != nil {
-			panic(err)
-		}
-
-		switch prefixChar {
-		case 'L':
-			bearing -= int(num)
-		case 'R':
-			bearing += int(num)
-		default:
-			panic("unknown prefix")
-		}
+		parseAndComputeBearing(line, &bearing)
 
 		if (bearing % 100) == 0 {
 			sum += 1
@@ -61,26 +45,9 @@ func part2(lines []string) {
 	sum := 0
 
 	for _, line := range lines {
-		if strings.TrimSpace(line) == "" {
-			continue
-		}
-
-		prefixChar := line[0]
-		num, err := strconv.ParseInt(line[1:], 10, 32)
-		if err != nil {
-			panic(err)
-		}
-
 		previousBearing := bearing
 
-		switch prefixChar {
-		case 'L':
-			bearing -= int(num)
-		case 'R':
-			bearing += int(num)
-		default:
-			panic("unknown prefix")
-		}
+		parseAndComputeBearing(line, &bearing)
 
 		var diff float64
 
@@ -95,5 +62,22 @@ func part2(lines []string) {
 		sum += int(diff)
 	}
 
-	visuals.PrintPart("2", "0 is hit", sum, "times (6907)")
+	visuals.PrintPart("2", "0 is hit", sum, "times")
+}
+
+func parseAndComputeBearing(line string, bearing *int) {
+	prefixChar := line[0]
+	num, err := strconv.ParseInt(line[1:], 10, 32)
+	if err != nil {
+		panic(err)
+	}
+
+	switch prefixChar {
+	case 'L':
+		*bearing -= int(num)
+	case 'R':
+		*bearing += int(num)
+	default:
+		panic("unknown prefix")
+	}
 }
