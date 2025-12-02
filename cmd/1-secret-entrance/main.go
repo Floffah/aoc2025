@@ -4,6 +4,7 @@ import (
 	"math"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/Floffah/aoc2025/internal/pkg/inputs"
 	"github.com/Floffah/aoc2025/internal/pkg/visuals"
@@ -20,6 +21,8 @@ func main() {
 }
 
 func part1(lines []string) {
+	start := time.Now()
+
 	bearing := 50
 	sum := 0
 
@@ -30,7 +33,7 @@ func part1(lines []string) {
 			sum += 1
 		}
 	}
-	visuals.PrintPart("1", "0 occurs", sum, "times")
+	visuals.PrintPart("1", start, "0 occurs", sum, "times")
 }
 
 //       __
@@ -41,6 +44,8 @@ func part1(lines []string) {
 //    `======'
 
 func part2(lines []string) {
+	start := time.Now()
+
 	bearing := 50
 	sum := 0
 
@@ -62,7 +67,7 @@ func part2(lines []string) {
 		sum += int(diff)
 	}
 
-	visuals.PrintPart("2", "0 is hit", sum, "times")
+	visuals.PrintPart("2", start, "0 is hit", sum, "times")
 }
 
 func parseAndComputeBearing(line string, bearing *int) {

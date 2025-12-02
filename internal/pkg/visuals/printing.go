@@ -2,6 +2,7 @@ package visuals
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/charmbracelet/lipgloss"
 )
@@ -19,11 +20,17 @@ func PrintDay(day string) {
 }
 
 var partStyle = lipgloss.NewStyle().
-	Underline(true).
 	Foreground(lipgloss.Color("#9333ea")).
 	MarginRight(1)
 
-func PrintPart(part string, args ...any) {
-	fmt.Print(partStyle.Render("Part " + part + ":"))
+var partTimeStyle = lipgloss.NewStyle().
+	Foreground(lipgloss.Color("#4338ca"))
+
+func PrintPart(part string, start time.Time, args ...any) {
+	duration := time.Since(start)
+
+	fmt.Print(partStyle.Underline(true).Render("Part " + part))
+	fmt.Print(partTimeStyle.Render("(" + duration.String() + ")"))
+	fmt.Print(partStyle.Render(":"))
 	fmt.Println(args...)
 }

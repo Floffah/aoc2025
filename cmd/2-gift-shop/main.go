@@ -3,6 +3,7 @@ package main
 import (
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/Floffah/aoc2025/internal/pkg/inputs"
 	"github.com/Floffah/aoc2025/internal/pkg/visuals"
@@ -19,6 +20,8 @@ func main() {
 }
 
 func part1(ranges []string) {
+	start := time.Now()
+
 	var sum int64 = 0
 
 	for _, r := range ranges {
@@ -36,10 +39,12 @@ func part1(ranges []string) {
 		}
 	}
 
-	visuals.PrintPart("1", "Sum of invalid gift shop ranges:", sum)
+	visuals.PrintPart("1", start, "Invalid ranges (repeats twice):", sum)
 }
 
 func part2(ranges []string) {
+	start := time.Now()
+
 	var sum int64 = 0
 
 	for _, r := range ranges {
@@ -54,7 +59,7 @@ func part2(ranges []string) {
 		}
 	}
 
-	visuals.PrintPart("2", "Sum of invalid gift shop ranges with more than two equal parts:", sum)
+	visuals.PrintPart("2", start, "Invalid ranges (repeats ∞):", sum)
 }
 
 func splitEvenly(s string) []string {
