@@ -3,6 +3,7 @@ package main
 import (
 	"strconv"
 	"strings"
+	"sync"
 	"time"
 
 	"github.com/Floffah/aoc2025/internal/pkg/inputs"
@@ -46,18 +47,27 @@ func part2(ranges []string) {
 	start := time.Now()
 
 	var sum int64 = 0
+	var sumMu sync.Mutex
+	var wg sync.WaitGroup
 
 	for _, r := range ranges {
-		start, end := parseRange(r)
+		wg.Go(func() {
+			start, end := parseRange(r)
 
-		for i := start; i <= end; i++ {
-			numStr := strconv.FormatInt(i, 10)
-			parts := splitEvenly(numStr)
-			if parts != nil && allEqual(parts) && allEqualLen(parts) {
-				sum += i
+			for i := start; i <= end; i++ {
+				numStr := strconv.FormatInt(i, 10)
+				parts := splitEvenly(numStr)
+				if parts != nil && allEqual(parts) {
+					sumMu.Lock()
+					sum += i
+					sumMu.Unlock()
+					break
+				}
 			}
-		}
+		})
 	}
+
+	wg.Wait()
 
 	visuals.PrintPart("2", start, "Invalid ranges (repeats ∞):", sum)
 }
@@ -91,16 +101,6 @@ func splitIntoParts(s string, parts int) []string {
 func allEqual(s []string) bool {
 	for i := 1; i < len(s); i++ {
 		if s[i] != s[0] {
-			return false
-		}
-	}
-
-	return true
-}
-
-func allEqualLen(s []string) bool {
-	for i := 1; i < len(s); i++ {
-		if len(s[i]) != len(s[0]) {
 			return false
 		}
 	}
