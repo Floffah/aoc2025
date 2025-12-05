@@ -30,7 +30,7 @@ func part1(lines []string) {
 		sum += highest
 	}
 
-	visuals.PrintPart("1", start, "Sum of highest possible joltages:", sum)
+	visuals.PrintPart("1", start, "Sum of highest possible joltages (2 combins):", sum)
 }
 
 func part2(lines []string) {
@@ -44,7 +44,7 @@ func part2(lines []string) {
 		sum += highest
 	}
 
-	visuals.PrintPart("2", start, "Sum of highest possible joltages (new test):", sum, " (172664333119298)")
+	visuals.PrintPart("2", start, "Sum of highest possible joltages (12 combins):", sum)
 }
 
 func highestPossibleJoltageGreedy(numStr string, combinsCount int) int {
