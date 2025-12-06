@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	visuals.PrintDay("3")
+	visuals.PrintDay("5")
 
 	input := inputs.GetInput(5)
 	sections := strings.Split(strings.TrimSpace(input), "\n\n")

@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	visuals.PrintDay("3")
+	visuals.PrintDay("4")
 
 	input := inputs.GetInput(4)
 	lines := strings.Split(input, "\n")
