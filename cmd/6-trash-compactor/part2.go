@@ -18,7 +18,6 @@ func part2(diffLenLines []string) {
 
 	currentOperator := ""
 	var problemAccum []int
-	//numAccum := ""
 
 	for i := 0; i < len(lines[0]); i++ {
 		verticalStr := strings.TrimSpace(getVerticalString(lines, i))
@@ -57,7 +56,7 @@ func part2(diffLenLines []string) {
 		problemAccum = append(problemAccum, num)
 	}
 
-	visuals.PrintPart("2", start, "Sum of column results:", sum, "(10188206723429)")
+	visuals.PrintPart("2", start, "Sum of column results:", sum)
 }
 
 func getVerticalString(lines []string, colIdx int) string {
